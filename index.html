@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>puffership</title>
+  <meta name="description" content="Puffership is a small software studio. We build AI-native systems for security, for publishing and for the classroom.">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="assets/glider-logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -329,6 +330,16 @@
       color: var(--text-dim);
       font-size: 0.95rem;
     }
+    .about-card a {
+      display: inline-block;
+      margin-top: 1rem;
+      color: var(--cyan);
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      transition: color 0.3s;
+    }
+    .about-card a:hover { color: var(--pink); }
 
     /* ── examigo showcase ── */
     #examigo {
@@ -485,7 +496,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#about">about</a></li>
-    <li><a href="#examigo">projects</a></li>
+    <li><a href="#work">work</a></li>
     <li><a href="#contact">contact</a></li>
   </ul>
 </nav>
@@ -500,7 +511,7 @@
   <p class="tagline">hackers building tools for humans<span class="cursor"></span></p>
   <div class="cta-row">
     <a href="#about" class="btn btn-outline">Who we are</a>
-    <a href="#examigo" class="btn btn-outline">Our work</a>
+    <a href="#work" class="btn btn-outline">Our work</a>
     <a href="#contact" class="btn btn-outline">Say hello</a>
   </div>
 </section>
@@ -512,33 +523,63 @@
   <p class="section-label">// who we are</p>
   <h2 class="section-title">Software with substance</h2>
   <p style="color: var(--text-dim); max-width: 700px; margin-bottom: 1rem;">
-    Puffership is a software studio passionate about education and the potential of AI.
-    We build tools that solve real problems&mdash;no fluff, no vaporware.
+    Puffership is a small software studio. We build AI-native systems for security, for
+    publishing and for the classroom. Tools that solve real problems. No fluff, no vaporware.
   </p>
   <div class="about-grid">
     <div class="about-card">
       <div class="icon">&#x1F9E0;</div>
       <h3>AI-native</h3>
-      <p>We design around large language models from day one, not as an afterthought bolted onto legacy workflows.</p>
+      <p>We design around large language models from the first sketch, rather than bolting one onto a workflow that was already finished.</p>
     </div>
     <div class="about-card">
-      <div class="icon">&#x1F393;</div>
-      <h3>Education-focused</h3>
-      <p>Our mission is to shorten the feedback loop between practice and understanding, giving every student a better shot.</p>
+      <div class="icon">&#x1F512;</div>
+      <h3>Security-minded</h3>
+      <p>Built by a security engineer, so the threat model gets written before the code does. Least privilege and supply-chain hygiene come as standard.</p>
     </div>
     <div class="about-card">
       <div class="icon">&#x1F527;</div>
       <h3>Ship &amp; iterate</h3>
-      <p>Small team, fast cycles. We put working software in users' hands and improve from real feedback, not guesswork.</p>
+      <p>Small team, fast cycles. We put working software in front of people early and let what they actually do with it decide the next version.</p>
     </div>
   </div>
 </section>
 
 <div class="divider">&#x1F984;</div>
 
+<!-- work -->
+<section id="work">
+  <p class="section-label">// what we build</p>
+  <h2 class="section-title">Current work</h2>
+  <p style="color: var(--text-dim); max-width: 700px; margin-bottom: 1rem;">
+    Three projects in three unrelated fields. What they have in common is the hard part:
+    getting useful work out of a language model when you can't take its word for anything.
+  </p>
+  <div class="about-grid">
+    <div class="about-card">
+      <div class="icon">&#x1F6E1;&#xFE0F;</div>
+      <h3>Security research</h3>
+      <p>A scanner that reads public code for supply-chain and CI/CD weaknesses, a whole organisation at a time. Raw pattern matches are mostly noise, so every class of finding gets its own triage prompt. What survives, we report.</p>
+    </div>
+    <div class="about-card">
+      <div class="icon">&#x1F4E1;</div>
+      <h3>Multi-agent publishing</h3>
+      <p>A publishing pipeline that runs with nobody reading the output. The writer and the fact-checkers sit on different model families on purpose: ask three siblings of one model to check a claim their brother invented and all three will happily agree. Every article is costed to the cent.</p>
+    </div>
+    <div class="about-card">
+      <div class="icon">&#x1F393;</div>
+      <h3>Education</h3>
+      <p>Upload the course material, get an exam back. Students answer on paper, you scan the sheets in, and the handwriting is read and marked without you touching it.</p>
+      <a href="#examigo">See examigo &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider">* * *</div>
+
 <!-- examigo -->
 <section id="examigo">
-  <p class="section-label">// flagship project</p>
+  <p class="section-label">// in depth</p>
   <h2 class="section-title examigo-brand" style="font-size: clamp(2rem, 5vw, 3rem);"><span class="ex">ex</span><span class="am">am</span><span class="igo">igo</span></h2>
   <div class="examigo-showcase">
     <div class="examigo-info">
