@@ -3,8 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>puffership</title>
+  <title>puffership · AI-native systems for security, publishing and the classroom</title>
   <meta name="description" content="Puffership is a small software studio. We build AI-native systems for security, for publishing and for the classroom.">
+  <link rel="canonical" href="https://puffership.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://puffership.com/">
+  <meta property="og:site_name" content="puffership">
+  <meta property="og:title" content="puffership">
+  <meta property="og:description" content="A small software studio building AI-native systems for security, for publishing and for the classroom.">
+  <meta property="og:image" content="https://puffership.com/assets/glider-logo.svg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="puffership">
+  <meta name="twitter:description" content="A small software studio building AI-native systems for security, for publishing and for the classroom.">
+  <meta name="twitter:image" content="https://puffership.com/assets/glider-logo.svg">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="assets/glider-logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -444,6 +455,20 @@
       font-family: 'Space Mono', monospace;
     }
 
+    /* ── reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .grid-bg { animation: none; }
+      .particles { display: none; }
+      .hero .tagline .cursor { animation: none; }
+      .btn:hover, .about-card:hover, .examigo-screenshot-wrap img:hover {
+        transform: none;
+      }
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+
     /* ── responsive ── */
     @media (max-width: 768px) {
       .examigo-showcase {
@@ -594,7 +619,6 @@
         <li>Instant AI-powered qualitative feedback for every student</li>
         <li>Works in 🇬🇧 🇫🇷 🇪🇸, any subject</li>
       </ul>
-      <a href="https://examigo.app" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Visit <span class="examigo-brand"><span class="ex">ex</span><span class="am">am</span><span class="igo">igo</span></span></a>
     </div>
     <div class="examigo-screenshot-wrap">
       <img src="assets/examigo-screenshot.png" alt="examigo application screenshot showing the landing page and feedback loop features">
@@ -617,6 +641,7 @@
 <script>
   // ── floating particles ──
   (function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const container = document.getElementById('particles');
     const colors = ['#9b4dff', '#ff4dc4', '#4df0ff', '#ffe14d'];
     for (let i = 0; i < 30; i++) {
@@ -798,15 +823,26 @@
       grid[r][c] = 1;
     }, { passive: false });
 
-    // game loop
+    // generations pause under reduced motion, and the whole loop idles off-screen;
+    // drawing still runs so the grid stays interactive either way
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let onScreen = true;
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        onScreen = entries[0].isIntersecting;
+      }).observe(canvas);
+    }
+
     let lastStep = 0;
     const STEP_INTERVAL = 150; // ms between generations
     function loop(ts) {
-      if (ts - lastStep > STEP_INTERVAL) {
-        step();
-        lastStep = ts;
+      if (onScreen) {
+        if (!reduceMotion.matches && ts - lastStep > STEP_INTERVAL) {
+          step();
+          lastStep = ts;
+        }
+        draw();
       }
-      draw();
       requestAnimationFrame(loop);
     }
     draw();
